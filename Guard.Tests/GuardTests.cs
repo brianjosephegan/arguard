@@ -89,6 +89,54 @@ namespace Guard.Tests
             StringAssert.Contains($"{nameof(emptyGuid)} cannot be empty", ex.Message);
         }
 
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(int.MinValue)]
+        public void ArgumentNotNegative_NegativeInteger(int negativeInteger)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotNegative(negativeInteger, nameof(negativeInteger)));
+
+            StringAssert.Contains(nameof(negativeInteger), ex.ParamName);
+            StringAssert.Contains($"{nameof(negativeInteger)} cannot be negative", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(int.MaxValue)]
+        public void ArgumentNotNegative_NonNegativeInteger(int nonNegativeInteger)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotNegative(nonNegativeInteger, nameof(nonNegativeInteger)));
+        }
+
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentNotNegative_NegativeLong(long negativeLong)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotNegative(negativeLong, nameof(negativeLong)));
+
+            StringAssert.Contains(nameof(negativeLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(negativeLong)} cannot be negative", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentNotNegative_NonNegativeLong(long nonNegativeLong)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotNegative(nonNegativeLong, nameof(nonNegativeLong)));
+        }
+
         [Test]
         public void ArgumentNotEmptyGuid_ValidGuid()
         {
