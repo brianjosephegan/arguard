@@ -36,57 +36,66 @@ namespace Guard.Tests
         }
 
         [Test]
-        public void ArgumentNotNullOrEmptyString_NullString()
-        {
-            string nullString = null;
-
-            var ex = Assert.Throws<ArgumentNullException>(
-                () => Guard.ArgumentNotNullOrEmptyString(nullString, nameof(nullString)));
-
-            StringAssert.Contains(nameof(nullString), ex.ParamName);
-            StringAssert.Contains($"{nameof(nullString)} cannot be null", ex.Message);
-        }
-
-        [Test]
-        public void ArgumentNotNullOrEmptyString_EmptyString()
+        public void ArgumentEmptyString_EmptyString()
         {
             string emptyString = string.Empty;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotNullOrEmptyString(emptyString, nameof(emptyString)));
+                () => Guard.ArgumentNotEmptyString(emptyString, nameof(emptyString)));
 
             StringAssert.Contains(nameof(emptyString), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyString)} cannot be empty", ex.Message);
         }
 
         [Test]
-        public void ArgumentNotNullOrEmptyString_ValidString()
+        public void ArgumentNotEmptyString_ValidString()
         {
             string validString = "This is a valid string.";
 
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotNullOrEmptyString(validString, nameof(validString)));
+                () => Guard.ArgumentNotEmptyString(validString, nameof(validString)));
         }
 
         [Test]
-        public void GuidNotEmpty_EmptyGuid()
+        public void ArgumentNotEmptyCollection_EmptyCollection()
+        {
+            IEnumerable<object> emptyCollection = Enumerable.Empty<object>();
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
+
+            StringAssert.Contains(nameof(emptyCollection), ex.ParamName);
+            StringAssert.Contains($"{nameof(emptyCollection)} cannot be empty", ex.Message);
+        }
+
+        [Test]
+        public void ArgumentNotEmptyCollection_ValidCollection()
+        {
+            IEnumerable<object> emptyCollection = new List<object>() { new object() };
+
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
+        }
+
+        [Test]
+        public void ArgumentNotEmptyGuid_EmptyGuid()
         {
             Guid emptyGuid = Guid.Empty;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.GuidNotEmpty(emptyGuid, nameof(emptyGuid)));
+                () => Guard.ArgumentNotEmptyGuid(emptyGuid, nameof(emptyGuid)));
 
             StringAssert.Contains(nameof(emptyGuid), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyGuid)} cannot be empty", ex.Message);
         }
 
         [Test]
-        public void GuidNotEmpty_ValidGuid()
+        public void ArgumentNotEmptyGuid_ValidGuid()
         {
             Guid validGuid = Guid.NewGuid();
 
             Assert.DoesNotThrow(
-                () => Guard.GuidNotEmpty(validGuid, nameof(validGuid)));
+                () => Guard.ArgumentNotEmptyGuid(validGuid, nameof(validGuid)));
         }
     }
 }

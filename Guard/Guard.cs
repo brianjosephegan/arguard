@@ -25,15 +25,26 @@ namespace Guard
         }
 
         /// <summary>
-        /// Checks a string argument to ensure it isn't null or empty.
+        /// Checks a string argument to ensure it isn't empty.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
-        public static void ArgumentNotNullOrEmptyString(string argumentValue, string argumentName)
+        public static void ArgumentNotEmptyString(string argumentValue, string argumentName)
         {
-            ArgumentNotNull(argumentValue, argumentName);
-
             if (argumentValue == string.Empty)
+            {
+                throw new ArgumentException($"{argumentName} cannot be empty", argumentName);
+            }
+        }
+
+        /// <summary>
+        /// Checks an enumerable argument to ensure it isn't empty.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        public static void ArgumentNotEmptyCollection<T>(IEnumerable<T> argumentValue, string argumentName)
+        {
+            if (!argumentValue.Any())
             {
                 throw new ArgumentException($"{argumentName} cannot be empty", argumentName);
             }
@@ -44,7 +55,7 @@ namespace Guard
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
-        public static void GuidNotEmpty(Guid argumentValue, string argumentName)
+        public static void ArgumentNotEmptyGuid(Guid argumentValue, string argumentName)
         {
             if (argumentValue == Guid.Empty)
             {
