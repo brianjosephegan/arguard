@@ -137,6 +137,54 @@ namespace Guard.Tests
                 () => Guard.ArgumentNotNegative(nonNegativeLong, nameof(nonNegativeLong)));
         }
 
+        [TestCase(-1.1f)]
+        [TestCase(-10.1f)]
+        [TestCase(-100.1f)]
+        [TestCase(float.MinValue)]
+        public void ArgumentNotNegative_NegativeFloat(float negativeFloat)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotNegative(negativeFloat, nameof(negativeFloat)));
+
+            StringAssert.Contains(nameof(negativeFloat), ex.ParamName);
+            StringAssert.Contains($"{nameof(negativeFloat)} cannot be negative", ex.Message);
+        }
+
+        [TestCase(0f)]
+        [TestCase(1f)]
+        [TestCase(10f)]
+        [TestCase(100f)]
+        [TestCase(float.MaxValue)]
+        public void ArgumentNotNegative_NonNegativeFloat(float nonNegativeFloat)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotNegative(nonNegativeFloat, nameof(nonNegativeFloat)));
+        }
+
+        [TestCase(-1.1)]
+        [TestCase(-10.1)]
+        [TestCase(-100.1)]
+        [TestCase(double.MinValue)]
+        public void ArgumentNotNegative_NegativeDouble(double negativeDouble)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotNegative(negativeDouble, nameof(negativeDouble)));
+
+            StringAssert.Contains(nameof(negativeDouble), ex.ParamName);
+            StringAssert.Contains($"{nameof(negativeDouble)} cannot be negative", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(double.MaxValue)]
+        public void ArgumentNotNegative_NonNegativeDouble(double nonNegativeDouble)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotNegative(nonNegativeDouble, nameof(nonNegativeDouble)));
+        }
+
         [Test]
         public void ArgumentNotEmptyGuid_ValidGuid()
         {

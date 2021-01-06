@@ -31,7 +31,7 @@ namespace Guard
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotEmptyString(string argumentValue, string argumentName)
         {
-            if (argumentValue == string.Empty)
+            if (string.IsNullOrEmpty(argumentValue))
             {
                 throw new ArgumentException($"{argumentName} cannot be empty", argumentName);
             }
