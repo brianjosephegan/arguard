@@ -186,6 +186,58 @@ namespace Guard.Tests
         }
 
         [Test]
+        public void ArgumentNotZero_ZeroInteger()
+        {
+            int zeroInteger = 0;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotZero(zeroInteger, nameof(zeroInteger)));
+
+            StringAssert.Contains(nameof(zeroInteger), ex.ParamName);
+            StringAssert.Contains($"{nameof(zeroInteger)} cannot be zero", ex.Message);
+        }
+
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(int.MinValue)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(int.MaxValue)]
+        public void ArgumentNotZero_NonZeroLong(int nonZeroInteger)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotZero(nonZeroInteger, nameof(nonZeroInteger)));
+        }
+
+        [Test]
+        public void ArgumentNotZero_ZeroLong()
+        {
+            long zeroLong = 0;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotZero(zeroLong, nameof(zeroLong)));
+
+            StringAssert.Contains(nameof(zeroLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(zeroLong)} cannot be zero", ex.Message);
+        }
+
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentNotZero_NonZeroLong(long nonZeroLong)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotZero(nonZeroLong, nameof(nonZeroLong)));
+        }
+
+        [Test]
         public void ArgumentNotEmptyGuid_ValidGuid()
         {
             Guid validGuid = Guid.NewGuid();
