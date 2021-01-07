@@ -238,6 +238,58 @@ namespace Guard.Tests
         }
 
         [Test]
+        public void ArgumentNotZero_ZeroFloat()
+        {
+            float zeroFloat = 0.0f;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotZero(zeroFloat, nameof(zeroFloat)));
+
+            StringAssert.Contains(nameof(zeroFloat), ex.ParamName);
+            StringAssert.Contains($"{nameof(zeroFloat)} cannot be zero", ex.Message);
+        }
+
+        [TestCase(-1.1f)]
+        [TestCase(-10.1f)]
+        [TestCase(-100.1f)]
+        [TestCase(float.MinValue)]
+        [TestCase(1.1f)]
+        [TestCase(10.1f)]
+        [TestCase(100.1f)]
+        [TestCase(float.MaxValue)]
+        public void ArgumentNotZero_NonZeroFloat(float nonZeroFloat)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotZero(nonZeroFloat, nameof(nonZeroFloat)));
+        }
+
+        [Test]
+        public void ArgumentNotZero_ZeroDouble()
+        {
+            double zeroDouble = 0.0;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotZero(zeroDouble, nameof(zeroDouble)));
+
+            StringAssert.Contains(nameof(zeroDouble), ex.ParamName);
+            StringAssert.Contains($"{nameof(zeroDouble)} cannot be zero", ex.Message);
+        }
+
+        [TestCase(-1.1)]
+        [TestCase(-10.1)]
+        [TestCase(-100.1)]
+        [TestCase(double.MinValue)]
+        [TestCase(1.1)]
+        [TestCase(10.1)]
+        [TestCase(100.1)]
+        [TestCase(double.MaxValue)]
+        public void ArgumentNotZero_NonZeroDouble(double nonZeroDouble)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotZero(nonZeroDouble, nameof(nonZeroDouble)));
+        }
+
+        [Test]
         public void ArgumentNotEmptyGuid_ValidGuid()
         {
             Guid validGuid = Guid.NewGuid();

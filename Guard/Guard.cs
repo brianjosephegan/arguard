@@ -90,6 +90,19 @@ namespace Guard
         }
 
         /// <summary>
+        /// Checks an double argument to ensure it isn't negative.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        public static void ArgumentNotZero(double argumentValue, string argumentName)
+        {
+            if (argumentValue == 0)
+            {
+                throw new ArgumentException($"{argumentName} cannot be zero", argumentName);
+            }
+        }
+
+        /// <summary>
         /// Checks to ensure that the GUID is not empty.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
