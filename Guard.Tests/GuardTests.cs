@@ -289,6 +289,54 @@ namespace Guard.Tests
                 () => Guard.ArgumentNotZero(nonZeroDouble, nameof(nonZeroDouble)));
         }
 
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(int.MinValue)]
+        public void ArgumentNotPositive_NonPositiveInteger(int nonPositiveInteger)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotPositive(nonPositiveInteger, nameof(nonPositiveInteger)));
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(int.MaxValue)]
+        public void ArgumentNotPositive_PositiveInteger(int positiveInteger)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotPositive(positiveInteger, nameof(positiveInteger)));
+
+            StringAssert.Contains(nameof(positiveInteger), ex.ParamName);
+            StringAssert.Contains($"{nameof(positiveInteger)} cannot be positive", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentNotPositive_NonPositiveLong(long nonPositiveLong)
+        {
+            Assert.DoesNotThrow(
+                () => Guard.ArgumentNotPositive(nonPositiveLong, nameof(nonPositiveLong)));
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentNotPositive_PositiveLong(long positiveLong)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Guard.ArgumentNotPositive(positiveLong, nameof(positiveLong)));
+
+            StringAssert.Contains(nameof(positiveLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(positiveLong)} cannot be positive", ex.Message);
+        }
+
         [Test]
         public void ArgumentNotEmptyGuid_ValidGuid()
         {
