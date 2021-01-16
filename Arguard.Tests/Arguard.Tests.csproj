@@ -48,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArguardDouble.cs" />
-    <Compile Include="ArguardEnumerable.cs" />
+    <Compile Include="ArguardDoubleTests.cs" />
+    <Compile Include="ArguardEnumerableTests.cs" />
     <Compile Include="ArguardGuidTests.cs" />
-    <Compile Include="ArguardLong.cs" />
+    <Compile Include="ArguardLongTests.cs" />
     <Compile Include="ArguardNullTests.cs" />
     <Compile Include="ArguardStringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

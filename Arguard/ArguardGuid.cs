@@ -12,6 +12,19 @@ namespace Arguard
     public static partial class Arguard
     {
         /// <summary>
+        /// Checks to ensure that the GUID is empty.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        public static void ArgumentEmptyGuid(Guid argumentValue, string argumentName)
+        {
+            if (argumentValue != Guid.Empty)
+            {
+                throw new ArgumentException($"{argumentName} must be empty", argumentName);
+            }
+        }
+
+        /// <summary>
         /// Checks to ensure that the GUID is not empty.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>

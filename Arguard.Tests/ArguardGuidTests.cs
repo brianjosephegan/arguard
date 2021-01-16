@@ -14,6 +14,27 @@ namespace Arguard.Tests
     public class ArguardGuidTests
     {
         [Test]
+        public void ArgumentEmptyGuid_EmptyGuid()
+        {
+            Guid emptyGuid = Guid.Empty;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentEmptyGuid(emptyGuid, nameof(emptyGuid)));
+        }
+
+        [Test]
+        public void ArgumentEmptyGuid_ValidGuid()
+        {
+            Guid validGuid = Guid.NewGuid();
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentEmptyGuid(validGuid, nameof(validGuid)));
+
+            StringAssert.Contains(nameof(validGuid), ex.ParamName);
+            StringAssert.Contains($"{nameof(validGuid)} must be empty", ex.Message);
+        }
+
+        [Test]
         public void ArgumentNotEmptyGuid_ValidGuid()
         {
             Guid validGuid = Guid.NewGuid();

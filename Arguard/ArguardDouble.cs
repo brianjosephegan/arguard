@@ -16,11 +16,11 @@ namespace Arguard
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
-        public static void ArgumentNotNegative(double argumentValue, string argumentName)
+        public static void ArgumentNotZero(double argumentValue, string argumentName)
         {
-            if (argumentValue < 0)
+            if (argumentValue == 0)
             {
-                throw new ArgumentException($"{argumentName} cannot be negative", argumentName);
+                throw new ArgumentException($"{argumentName} cannot be zero", argumentName);
             }
         }
 
@@ -29,11 +29,11 @@ namespace Arguard
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
-        public static void ArgumentNotZero(double argumentValue, string argumentName)
+        public static void ArgumentNotNegative(double argumentValue, string argumentName)
         {
-            if (argumentValue == 0)
+            if (argumentValue < 0)
             {
-                throw new ArgumentException($"{argumentName} cannot be zero", argumentName);
+                throw new ArgumentException($"{argumentName} cannot be negative", argumentName);
             }
         }
     }

@@ -13,54 +13,6 @@ namespace Arguard.Tests
     [TestFixture]
     public class ArguardLongTests
     {
-        [TestCase(0)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(-100)]
-        [TestCase(int.MinValue)]
-        public void ArgumentNotPositive_NonPositiveInteger(int nonPositiveInteger)
-        {
-            Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotPositive(nonPositiveInteger, nameof(nonPositiveInteger)));
-        }
-
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(100)]
-        [TestCase(int.MaxValue)]
-        public void ArgumentNotPositive_PositiveInteger(int positiveInteger)
-        {
-            var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNotPositive(positiveInteger, nameof(positiveInteger)));
-
-            StringAssert.Contains(nameof(positiveInteger), ex.ParamName);
-            StringAssert.Contains($"{nameof(positiveInteger)} cannot be positive", ex.Message);
-        }
-
-        [TestCase(0)]
-        [TestCase(-1)]
-        [TestCase(-10)]
-        [TestCase(-100)]
-        [TestCase(long.MinValue)]
-        public void ArgumentNotPositive_NonPositiveLong(long nonPositiveLong)
-        {
-            Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotPositive(nonPositiveLong, nameof(nonPositiveLong)));
-        }
-
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(100)]
-        [TestCase(long.MaxValue)]
-        public void ArgumentNotPositive_PositiveLong(long positiveLong)
-        {
-            var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNotPositive(positiveLong, nameof(positiveLong)));
-
-            StringAssert.Contains(nameof(positiveLong), ex.ParamName);
-            StringAssert.Contains($"{nameof(positiveLong)} cannot be positive", ex.Message);
-        }
-
         [Test]
         public void ArgumentNotZero_ZeroInteger()
         {
@@ -159,6 +111,54 @@ namespace Arguard.Tests
         {
             Assert.DoesNotThrow(
                 () => Arguard.ArgumentNotNegative(nonNegativeLong, nameof(nonNegativeLong)));
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(int.MinValue)]
+        public void ArgumentNotPositive_NonPositiveInteger(int nonPositiveInteger)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNotPositive(nonPositiveInteger, nameof(nonPositiveInteger)));
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(int.MaxValue)]
+        public void ArgumentNotPositive_PositiveInteger(int positiveInteger)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNotPositive(positiveInteger, nameof(positiveInteger)));
+
+            StringAssert.Contains(nameof(positiveInteger), ex.ParamName);
+            StringAssert.Contains($"{nameof(positiveInteger)} cannot be positive", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentNotPositive_NonPositiveLong(long nonPositiveLong)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNotPositive(nonPositiveLong, nameof(nonPositiveLong)));
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentNotPositive_PositiveLong(long positiveLong)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNotPositive(positiveLong, nameof(positiveLong)));
+
+            StringAssert.Contains(nameof(positiveLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(positiveLong)} cannot be positive", ex.Message);
         }
     }
 }
