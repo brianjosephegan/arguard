@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arguard.cs" />
+    <Compile Include="ArguardDouble.cs" />
+    <Compile Include="ArguardEnumerable.cs" />
+    <Compile Include="ArguardGuid.cs" />
+    <Compile Include="ArguardLong.cs" />
+    <Compile Include="ArguardNull.cs" />
+    <Compile Include="ArguardString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
