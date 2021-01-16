@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Guard;
 using NUnit.Framework;
 
-namespace Guard.Tests
+namespace Arguard.Tests
 {
     /// <summary>
-    /// Unit tests for <see cref="Guard"/> class.
+    /// Unit tests for <see cref="Arguard"/> class.
     /// </summary>
     [TestFixture]
-    public class GuardTests
+    public class ArguardTests
     {
         [Test]
         public void ArgumentNotNull_NullArgument()
@@ -20,7 +19,7 @@ namespace Guard.Tests
             object nullObject = null;
 
             var ex = Assert.Throws<ArgumentNullException>(
-                () => Guard.ArgumentNotNull(nullObject, nameof(nullObject)));
+                () => Arguard.ArgumentNotNull(nullObject, nameof(nullObject)));
 
             StringAssert.Contains(nameof(nullObject), ex.ParamName);
             StringAssert.Contains($"{nameof(nullObject)} cannot be null", ex.Message);
@@ -32,7 +31,7 @@ namespace Guard.Tests
             object notNullObject = new object();
 
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotNull(notNullObject, nameof(notNullObject)));
+                () => Arguard.ArgumentNotNull(notNullObject, nameof(notNullObject)));
         }
 
         [Test]
@@ -41,7 +40,7 @@ namespace Guard.Tests
             string emptyString = string.Empty;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotEmptyString(emptyString, nameof(emptyString)));
+                () => Arguard.ArgumentNotEmptyString(emptyString, nameof(emptyString)));
 
             StringAssert.Contains(nameof(emptyString), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyString)} cannot be empty", ex.Message);
@@ -53,7 +52,7 @@ namespace Guard.Tests
             string validString = "This is a valid string.";
 
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotEmptyString(validString, nameof(validString)));
+                () => Arguard.ArgumentNotEmptyString(validString, nameof(validString)));
         }
 
         [Test]
@@ -62,7 +61,7 @@ namespace Guard.Tests
             IEnumerable<object> emptyCollection = Enumerable.Empty<object>();
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
+                () => Arguard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
 
             StringAssert.Contains(nameof(emptyCollection), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyCollection)} cannot be empty", ex.Message);
@@ -74,7 +73,7 @@ namespace Guard.Tests
             IEnumerable<object> emptyCollection = new List<object>() { new object() };
 
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
+                () => Arguard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
         }
 
         [Test]
@@ -83,7 +82,7 @@ namespace Guard.Tests
             Guid emptyGuid = Guid.Empty;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotEmptyGuid(emptyGuid, nameof(emptyGuid)));
+                () => Arguard.ArgumentNotEmptyGuid(emptyGuid, nameof(emptyGuid)));
 
             StringAssert.Contains(nameof(emptyGuid), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyGuid)} cannot be empty", ex.Message);
@@ -96,7 +95,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NegativeInteger(int negativeInteger)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotNegative(negativeInteger, nameof(negativeInteger)));
+                () => Arguard.ArgumentNotNegative(negativeInteger, nameof(negativeInteger)));
 
             StringAssert.Contains(nameof(negativeInteger), ex.ParamName);
             StringAssert.Contains($"{nameof(negativeInteger)} cannot be negative", ex.Message);
@@ -110,7 +109,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NonNegativeInteger(int nonNegativeInteger)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotNegative(nonNegativeInteger, nameof(nonNegativeInteger)));
+                () => Arguard.ArgumentNotNegative(nonNegativeInteger, nameof(nonNegativeInteger)));
         }
 
         [TestCase(-1)]
@@ -120,7 +119,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NegativeLong(long negativeLong)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotNegative(negativeLong, nameof(negativeLong)));
+                () => Arguard.ArgumentNotNegative(negativeLong, nameof(negativeLong)));
 
             StringAssert.Contains(nameof(negativeLong), ex.ParamName);
             StringAssert.Contains($"{nameof(negativeLong)} cannot be negative", ex.Message);
@@ -134,7 +133,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NonNegativeLong(long nonNegativeLong)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotNegative(nonNegativeLong, nameof(nonNegativeLong)));
+                () => Arguard.ArgumentNotNegative(nonNegativeLong, nameof(nonNegativeLong)));
         }
 
         [TestCase(-1.1f)]
@@ -144,7 +143,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NegativeFloat(float negativeFloat)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotNegative(negativeFloat, nameof(negativeFloat)));
+                () => Arguard.ArgumentNotNegative(negativeFloat, nameof(negativeFloat)));
 
             StringAssert.Contains(nameof(negativeFloat), ex.ParamName);
             StringAssert.Contains($"{nameof(negativeFloat)} cannot be negative", ex.Message);
@@ -158,7 +157,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NonNegativeFloat(float nonNegativeFloat)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotNegative(nonNegativeFloat, nameof(nonNegativeFloat)));
+                () => Arguard.ArgumentNotNegative(nonNegativeFloat, nameof(nonNegativeFloat)));
         }
 
         [TestCase(-1.1)]
@@ -168,7 +167,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NegativeDouble(double negativeDouble)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotNegative(negativeDouble, nameof(negativeDouble)));
+                () => Arguard.ArgumentNotNegative(negativeDouble, nameof(negativeDouble)));
 
             StringAssert.Contains(nameof(negativeDouble), ex.ParamName);
             StringAssert.Contains($"{nameof(negativeDouble)} cannot be negative", ex.Message);
@@ -182,7 +181,7 @@ namespace Guard.Tests
         public void ArgumentNotNegative_NonNegativeDouble(double nonNegativeDouble)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotNegative(nonNegativeDouble, nameof(nonNegativeDouble)));
+                () => Arguard.ArgumentNotNegative(nonNegativeDouble, nameof(nonNegativeDouble)));
         }
 
         [Test]
@@ -191,7 +190,7 @@ namespace Guard.Tests
             int zeroInteger = 0;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotZero(zeroInteger, nameof(zeroInteger)));
+                () => Arguard.ArgumentNotZero(zeroInteger, nameof(zeroInteger)));
 
             StringAssert.Contains(nameof(zeroInteger), ex.ParamName);
             StringAssert.Contains($"{nameof(zeroInteger)} cannot be zero", ex.Message);
@@ -208,7 +207,7 @@ namespace Guard.Tests
         public void ArgumentNotZero_NonZeroLong(int nonZeroInteger)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotZero(nonZeroInteger, nameof(nonZeroInteger)));
+                () => Arguard.ArgumentNotZero(nonZeroInteger, nameof(nonZeroInteger)));
         }
 
         [Test]
@@ -217,7 +216,7 @@ namespace Guard.Tests
             long zeroLong = 0;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotZero(zeroLong, nameof(zeroLong)));
+                () => Arguard.ArgumentNotZero(zeroLong, nameof(zeroLong)));
 
             StringAssert.Contains(nameof(zeroLong), ex.ParamName);
             StringAssert.Contains($"{nameof(zeroLong)} cannot be zero", ex.Message);
@@ -234,7 +233,7 @@ namespace Guard.Tests
         public void ArgumentNotZero_NonZeroLong(long nonZeroLong)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotZero(nonZeroLong, nameof(nonZeroLong)));
+                () => Arguard.ArgumentNotZero(nonZeroLong, nameof(nonZeroLong)));
         }
 
         [Test]
@@ -243,7 +242,7 @@ namespace Guard.Tests
             float zeroFloat = 0.0f;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotZero(zeroFloat, nameof(zeroFloat)));
+                () => Arguard.ArgumentNotZero(zeroFloat, nameof(zeroFloat)));
 
             StringAssert.Contains(nameof(zeroFloat), ex.ParamName);
             StringAssert.Contains($"{nameof(zeroFloat)} cannot be zero", ex.Message);
@@ -260,7 +259,7 @@ namespace Guard.Tests
         public void ArgumentNotZero_NonZeroFloat(float nonZeroFloat)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotZero(nonZeroFloat, nameof(nonZeroFloat)));
+                () => Arguard.ArgumentNotZero(nonZeroFloat, nameof(nonZeroFloat)));
         }
 
         [Test]
@@ -269,7 +268,7 @@ namespace Guard.Tests
             double zeroDouble = 0.0;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotZero(zeroDouble, nameof(zeroDouble)));
+                () => Arguard.ArgumentNotZero(zeroDouble, nameof(zeroDouble)));
 
             StringAssert.Contains(nameof(zeroDouble), ex.ParamName);
             StringAssert.Contains($"{nameof(zeroDouble)} cannot be zero", ex.Message);
@@ -286,7 +285,7 @@ namespace Guard.Tests
         public void ArgumentNotZero_NonZeroDouble(double nonZeroDouble)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotZero(nonZeroDouble, nameof(nonZeroDouble)));
+                () => Arguard.ArgumentNotZero(nonZeroDouble, nameof(nonZeroDouble)));
         }
 
         [TestCase(0)]
@@ -297,7 +296,7 @@ namespace Guard.Tests
         public void ArgumentNotPositive_NonPositiveInteger(int nonPositiveInteger)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotPositive(nonPositiveInteger, nameof(nonPositiveInteger)));
+                () => Arguard.ArgumentNotPositive(nonPositiveInteger, nameof(nonPositiveInteger)));
         }
 
         [TestCase(1)]
@@ -307,7 +306,7 @@ namespace Guard.Tests
         public void ArgumentNotPositive_PositiveInteger(int positiveInteger)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotPositive(positiveInteger, nameof(positiveInteger)));
+                () => Arguard.ArgumentNotPositive(positiveInteger, nameof(positiveInteger)));
 
             StringAssert.Contains(nameof(positiveInteger), ex.ParamName);
             StringAssert.Contains($"{nameof(positiveInteger)} cannot be positive", ex.Message);
@@ -321,7 +320,7 @@ namespace Guard.Tests
         public void ArgumentNotPositive_NonPositiveLong(long nonPositiveLong)
         {
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotPositive(nonPositiveLong, nameof(nonPositiveLong)));
+                () => Arguard.ArgumentNotPositive(nonPositiveLong, nameof(nonPositiveLong)));
         }
 
         [TestCase(1)]
@@ -331,7 +330,7 @@ namespace Guard.Tests
         public void ArgumentNotPositive_PositiveLong(long positiveLong)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Guard.ArgumentNotPositive(positiveLong, nameof(positiveLong)));
+                () => Arguard.ArgumentNotPositive(positiveLong, nameof(positiveLong)));
 
             StringAssert.Contains(nameof(positiveLong), ex.ParamName);
             StringAssert.Contains($"{nameof(positiveLong)} cannot be positive", ex.Message);
@@ -343,7 +342,7 @@ namespace Guard.Tests
             Guid validGuid = Guid.NewGuid();
 
             Assert.DoesNotThrow(
-                () => Guard.ArgumentNotEmptyGuid(validGuid, nameof(validGuid)));
+                () => Arguard.ArgumentNotEmptyGuid(validGuid, nameof(validGuid)));
         }
     }
 }

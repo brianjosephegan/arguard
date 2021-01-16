@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Guard
+namespace Arguard
 {
     /// <summary>
     /// Class to provide a range of argument validation methods.
     /// </summary>
-    public static class Guard
+    public static class Arguard
     {
         /// <summary>
         /// Checks an argument to ensure it isn't null.
