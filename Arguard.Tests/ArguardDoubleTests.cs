@@ -14,32 +14,6 @@ namespace Arguard.Tests
     public class ArguardDoubleTests
     {
         [Test]
-        public void ArgumentNotZero_ZeroFloat()
-        {
-            float zeroFloat = 0.0f;
-
-            var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNotZero(zeroFloat, nameof(zeroFloat)));
-
-            StringAssert.Contains(nameof(zeroFloat), ex.ParamName);
-            StringAssert.Contains($"{nameof(zeroFloat)} cannot be zero", ex.Message);
-        }
-
-        [TestCase(-1.1f)]
-        [TestCase(-10.1f)]
-        [TestCase(-100.1f)]
-        [TestCase(float.MinValue)]
-        [TestCase(1.1f)]
-        [TestCase(10.1f)]
-        [TestCase(100.1f)]
-        [TestCase(float.MaxValue)]
-        public void ArgumentNotZero_NonZeroFloat(float nonZeroFloat)
-        {
-            Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotZero(nonZeroFloat, nameof(nonZeroFloat)));
-        }
-
-        [Test]
         public void ArgumentNotZero_ZeroDouble()
         {
             double zeroDouble = 0.0;
@@ -65,30 +39,6 @@ namespace Arguard.Tests
                 () => Arguard.ArgumentNotZero(nonZeroDouble, nameof(nonZeroDouble)));
         }
 
-        [TestCase(-1.1f)]
-        [TestCase(-10.1f)]
-        [TestCase(-100.1f)]
-        [TestCase(float.MinValue)]
-        public void ArgumentNotNegative_NegativeFloat(float negativeFloat)
-        {
-            var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNotNegative(negativeFloat, nameof(negativeFloat)));
-
-            StringAssert.Contains(nameof(negativeFloat), ex.ParamName);
-            StringAssert.Contains($"{nameof(negativeFloat)} cannot be negative", ex.Message);
-        }
-
-        [TestCase(0f)]
-        [TestCase(1f)]
-        [TestCase(10f)]
-        [TestCase(100f)]
-        [TestCase(float.MaxValue)]
-        public void ArgumentNotNegative_NonNegativeFloat(float nonNegativeFloat)
-        {
-            Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotNegative(nonNegativeFloat, nameof(nonNegativeFloat)));
-        }
-
         [TestCase(-1.1)]
         [TestCase(-10.1)]
         [TestCase(-100.1)]
@@ -103,14 +53,38 @@ namespace Arguard.Tests
         }
 
         [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(10)]
-        [TestCase(100)]
+        [TestCase(1.1)]
+        [TestCase(10.1)]
+        [TestCase(100.1)]
         [TestCase(double.MaxValue)]
         public void ArgumentNotNegative_NonNegativeDouble(double nonNegativeDouble)
         {
             Assert.DoesNotThrow(
                 () => Arguard.ArgumentNotNegative(nonNegativeDouble, nameof(nonNegativeDouble)));
+        }
+
+        [TestCase(0)]
+        [TestCase(-1.1)]
+        [TestCase(-10.1)]
+        [TestCase(-100.1)]
+        [TestCase(double.MinValue)]
+        public void ArgumentNotPositive_NonPositiveDouble(double nonPositiveDouble)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNotPositive(nonPositiveDouble, nameof(nonPositiveDouble)));
+        }
+
+        [TestCase(1.1)]
+        [TestCase(10.1)]
+        [TestCase(100.1)]
+        [TestCase(double.MaxValue)]
+        public void ArgumentNotPositive_PositiveDouble(double positiveDouble)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNotPositive(positiveDouble, nameof(positiveDouble)));
+
+            StringAssert.Contains(nameof(positiveDouble), ex.ParamName);
+            StringAssert.Contains($"{nameof(positiveDouble)} cannot be positive", ex.Message);
         }
     }
 }

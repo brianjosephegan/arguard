@@ -51,10 +51,12 @@
   <ItemGroup>
     <Compile Include="ArguardDoubleTests.cs" />
     <Compile Include="ArguardEnumerableTests.cs" />
+    <Compile Include="ArguardFloatTests.cs" />
     <Compile Include="ArguardGuidTests.cs" />
     <Compile Include="ArguardLongTests.cs" />
     <Compile Include="ArguardNullTests.cs" />
     <Compile Include="ArguardStringTests.cs" />
+    <Compile Include="ArguardIntegerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
