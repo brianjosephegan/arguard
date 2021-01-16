@@ -17,12 +17,7 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotZero(long argumentValue, string argumentName)
-        {
-            if (argumentValue == 0)
-            {
-                throw new ArgumentException($"{argumentName} cannot be zero", argumentName);
-            }
-        }
+            => ThrowArgumentExceptionIf(() => argumentValue == 0, argumentName, $"{argumentName} cannot be zero");
 
         /// <summary>
         /// Checks an long argument to ensure it isn't negative.
@@ -30,12 +25,7 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotNegative(long argumentValue, string argumentName)
-        {
-            if (argumentValue < 0)
-            {
-                throw new ArgumentException($"{argumentName} cannot be negative", argumentName);
-            }
-        }
+            => ThrowArgumentExceptionIf(() => argumentValue < 0, argumentName, $"{argumentName} cannot be negative");
 
         /// <summary>
         /// Checks an long argument to ensure it isn't positive.
@@ -43,11 +33,6 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotPositive(long argumentValue, string argumentName)
-        {
-            if (argumentValue > 0)
-            {
-                throw new ArgumentException($"{argumentName} cannot be positive", argumentName);
-            }
-        }
+            => ThrowArgumentExceptionIf(() => argumentValue > 0, argumentName, $"{argumentName} cannot be positive");
     }
 }

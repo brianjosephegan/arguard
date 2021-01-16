@@ -14,24 +14,45 @@ namespace Arguard.Tests
     public class ArguardStringTests
     {
         [Test]
-        public void ArgumentEmptyString_EmptyString()
+        public void ArgumentEmpty_EmptyString()
+        {
+            string emptyString = string.Empty;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentEmpty(emptyString, nameof(emptyString)));
+        }
+
+        [Test]
+        public void ArgumentEmpty_NonEmptyString()
+        {
+            string nonEmptyString = "This is not an empty string.";
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentEmpty(nonEmptyString, nameof(nonEmptyString)));
+
+            StringAssert.Contains(nameof(nonEmptyString), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonEmptyString)} must be empty", ex.Message);
+        }
+
+        [Test]
+        public void ArgumentNotEmpty_EmptyString()
         {
             string emptyString = string.Empty;
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNotEmptyString(emptyString, nameof(emptyString)));
+                () => Arguard.ArgumentNotEmpty(emptyString, nameof(emptyString)));
 
             StringAssert.Contains(nameof(emptyString), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyString)} cannot be empty", ex.Message);
         }
 
         [Test]
-        public void ArgumentNotEmptyString_ValidString()
+        public void ArgumentNotEmpty_ValidString()
         {
-            string validString = "This is a valid string.";
+            string nonEmptyString = "This is not an empty string.";
 
             Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotEmptyString(validString, nameof(validString)));
+                () => Arguard.ArgumentNotEmpty(nonEmptyString, nameof(nonEmptyString)));
         }
     }
 }

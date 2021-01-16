@@ -17,12 +17,7 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNull(object argumentValue, string argumentName)
-        {
-            if (argumentValue != null)
-            {
-                throw new ArgumentException(argumentName, $"{argumentName} must be null");
-            }
-        }
+            => ThrowArgumentExceptionIf(() => argumentValue != null, argumentName, $"{argumentName} must be null");
 
         /// <summary>
         /// Checks an argument to ensure it isn't null.
@@ -30,11 +25,7 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotNull(object argumentValue, string argumentName)
-        {
-            if (argumentValue == null)
-            {
-                throw new ArgumentNullException(argumentName, $"{argumentName} cannot be null");
-            }
-        }
+            => ThrowArgumentNullExceptionIf(() => argumentValue == null, argumentName, $"{argumentName} cannot be null");
+
     }
 }

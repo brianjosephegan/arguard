@@ -17,12 +17,8 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentEmptyGuid(Guid argumentValue, string argumentName)
-        {
-            if (argumentValue != Guid.Empty)
-            {
-                throw new ArgumentException($"{argumentName} must be empty", argumentName);
-            }
-        }
+            => ThrowArgumentExceptionIf(() => argumentValue != Guid.Empty, argumentName, $"{argumentName} must be empty");
+
 
         /// <summary>
         /// Checks to ensure that the GUID is not empty.
@@ -30,11 +26,6 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotEmptyGuid(Guid argumentValue, string argumentName)
-        {
-            if (argumentValue == Guid.Empty)
-            {
-                throw new ArgumentException($"{argumentName} cannot be empty", argumentName);
-            }
-        }
+            => ThrowArgumentExceptionIf(() => argumentValue == Guid.Empty, argumentName, $"{argumentName} cannot be empty");
     }
 }

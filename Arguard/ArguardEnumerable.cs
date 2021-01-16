@@ -17,11 +17,6 @@ namespace Arguard
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotEmptyCollection<T>(IEnumerable<T> argumentValue, string argumentName)
-        {
-            if (!argumentValue.Any())
-            {
-                throw new ArgumentException($"{argumentName} cannot be empty", argumentName);
-            }
-        }
+            => ThrowArgumentExceptionIf(() => !argumentValue.Any(), argumentName, $"{argumentName} cannot be empty");
     }
 }
