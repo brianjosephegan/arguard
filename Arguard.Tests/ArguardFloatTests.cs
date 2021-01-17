@@ -39,6 +39,54 @@ namespace Arguard.Tests
             StringAssert.Contains($"{nameof(nonZeroFloat)} must be zero", ex.Message);
         }
 
+        [TestCase(1.1f)]
+        [TestCase(10.1f)]
+        [TestCase(100.1f)]
+        [TestCase(float.MaxValue)]
+        public void ArgumentPositive_PositiveFloat(float positiveFloat)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentPositive(positiveFloat, nameof(positiveFloat)));
+        }
+
+        [TestCase(0f)]
+        [TestCase(-1.1f)]
+        [TestCase(-10.1f)]
+        [TestCase(-100.1f)]
+        [TestCase(float.MinValue)]
+        public void ArgumentPositive_NonPositiveFloat(float nonPositiveFloat)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentPositive(nonPositiveFloat, nameof(nonPositiveFloat)));
+
+            StringAssert.Contains(nameof(nonPositiveFloat), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonPositiveFloat)} must be positive", ex.Message);
+        }
+
+        [TestCase(-1.1f)]
+        [TestCase(-10.1f)]
+        [TestCase(-100.1f)]
+        [TestCase(float.MinValue)]
+        public void ArgumentNegative_NegativeFloat(float positiveFloat)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNegative(positiveFloat, nameof(positiveFloat)));
+        }
+
+        [TestCase(0f)]
+        [TestCase(1.1f)]
+        [TestCase(10.1f)]
+        [TestCase(100.1f)]
+        [TestCase(float.MaxValue)]
+        public void ArgumentNegative_NonNegativeFloat(float negativeFloat)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNegative(negativeFloat, nameof(negativeFloat)));
+
+            StringAssert.Contains(nameof(negativeFloat), ex.ParamName);
+            StringAssert.Contains($"{nameof(negativeFloat)} must be negative", ex.Message);
+        }
+
         [Test]
         public void ArgumentNotZero_ZeroFloat()
         {
