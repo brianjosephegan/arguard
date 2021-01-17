@@ -14,6 +14,32 @@ namespace Arguard.Tests
     public class ArguardFloatTests
     {
         [Test]
+        public void ArgumentZero_ZeroFloat()
+        {
+            float zeroFloat = 0.0f;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentZero(zeroFloat, nameof(zeroFloat)));
+        }
+
+        [TestCase(-1.1f)]
+        [TestCase(-10.1f)]
+        [TestCase(-100.1f)]
+        [TestCase(float.MinValue)]
+        [TestCase(1.1f)]
+        [TestCase(10.1f)]
+        [TestCase(100.1f)]
+        [TestCase(float.MaxValue)]
+        public void ArgumentZero_NonZeroFloat(float nonZeroFloat)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentZero(nonZeroFloat, nameof(nonZeroFloat)));
+
+            StringAssert.Contains(nameof(nonZeroFloat), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonZeroFloat)} must be zero", ex.Message);
+        }
+
+        [Test]
         public void ArgumentNotZero_ZeroFloat()
         {
             float zeroFloat = 0.0f;

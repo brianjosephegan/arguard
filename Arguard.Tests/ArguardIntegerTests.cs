@@ -14,6 +14,32 @@ namespace Arguard.Tests
     public class ArguardIntegerTests
     {
         [Test]
+        public void ArgumentZero_ZeroInteger()
+        {
+            int zeroInteger = 0;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentZero(zeroInteger, nameof(zeroInteger)));
+        }
+
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(int.MinValue)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(int.MaxValue)]
+        public void ArgumentZero_NonZeroDouble(int nonZeroInteger)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentZero(nonZeroInteger, nameof(nonZeroInteger)));
+
+            StringAssert.Contains(nameof(nonZeroInteger), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonZeroInteger)} must be zero", ex.Message);
+        }
+
+        [Test]
         public void ArgumentNotZero_ZeroInteger()
         {
             int zeroInteger = 0;

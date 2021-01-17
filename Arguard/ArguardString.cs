@@ -20,7 +20,7 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => !string.IsNullOrEmpty(argumentValue), argumentName, $"{argumentName} must be empty");
 
         /// <summary>
-        /// Checks a string argument to ensure it isn't empty.
+        /// Checks a string argument to ensure it is not empty.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>

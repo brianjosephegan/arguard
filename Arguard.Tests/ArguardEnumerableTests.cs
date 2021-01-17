@@ -19,7 +19,7 @@ namespace Arguard.Tests
             IEnumerable<object> emptyCollection = Enumerable.Empty<object>();
 
             var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
+                () => Arguard.ArgumentNotEmpty(emptyCollection, nameof(emptyCollection)));
 
             StringAssert.Contains(nameof(emptyCollection), ex.ParamName);
             StringAssert.Contains($"{nameof(emptyCollection)} cannot be empty", ex.Message);
@@ -31,7 +31,7 @@ namespace Arguard.Tests
             IEnumerable<object> emptyCollection = new List<object>() { new object() };
 
             Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotEmptyCollection(emptyCollection, nameof(emptyCollection)));
+                () => Arguard.ArgumentNotEmpty(emptyCollection, nameof(emptyCollection)));
         }
     }
 }

@@ -14,6 +14,32 @@ namespace Arguard.Tests
     public class ArguardLongTests
     {
         [Test]
+        public void ArgumentZero_ZeroLong()
+        {
+            long zeroLong = 0;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentZero(zeroLong, nameof(zeroLong)));
+        }
+
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentZero_NonZeroDouble(double nonZeroLong)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentZero(nonZeroLong, nameof(nonZeroLong)));
+
+            StringAssert.Contains(nameof(nonZeroLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonZeroLong)} must be zero", ex.Message);
+        }
+
+        [Test]
         public void ArgumentNotZero_ZeroLong()
         {
             long zeroLong = 0;

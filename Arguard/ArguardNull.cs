@@ -20,7 +20,7 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => argumentValue != null, argumentName, $"{argumentName} must be null");
 
         /// <summary>
-        /// Checks an argument to ensure it isn't null.
+        /// Checks an argument to ensure it is not null.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>

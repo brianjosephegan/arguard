@@ -14,6 +14,32 @@ namespace Arguard.Tests
     public class ArguardDoubleTests
     {
         [Test]
+        public void ArgumentZero_ZeroDouble()
+        {
+            double zeroDouble = 0.0;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentZero(zeroDouble, nameof(zeroDouble)));
+        }
+
+        [TestCase(-1.1)]
+        [TestCase(-10.1)]
+        [TestCase(-100.1)]
+        [TestCase(double.MinValue)]
+        [TestCase(1.1)]
+        [TestCase(10.1)]
+        [TestCase(100.1)]
+        [TestCase(double.MaxValue)]
+        public void ArgumentZero_NonZeroDouble(double nonZeroDouble)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentZero(nonZeroDouble, nameof(nonZeroDouble)));
+
+            StringAssert.Contains(nameof(nonZeroDouble), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonZeroDouble)} must be zero", ex.Message);
+        }
+
+        [Test]
         public void ArgumentNotZero_ZeroDouble()
         {
             double zeroDouble = 0.0;

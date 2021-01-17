@@ -12,7 +12,7 @@ namespace Arguard
     public static partial class Arguard
     {
         /// <summary>
-        /// Checks an long argument to ensure it isn't negative.
+        /// Checks an long argument to ensure it is not zero.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
@@ -20,7 +20,7 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => argumentValue == 0, argumentName, $"{argumentName} cannot be zero");
 
         /// <summary>
-        /// Checks an long argument to ensure it isn't negative.
+        /// Checks an long argument to ensure it not negative.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
@@ -28,7 +28,7 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => argumentValue < 0, argumentName, $"{argumentName} cannot be negative");
 
         /// <summary>
-        /// Checks an long argument to ensure it isn't positive.
+        /// Checks an long argument to ensure it is not positive.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
