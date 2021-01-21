@@ -14,7 +14,28 @@ namespace Arguard.Tests
     public class ArguardEnumerableTests
     {
         [Test]
-        public void ArgumentNotEmptyCollection_EmptyCollection()
+        public void ArgumentEmpty_EmptyCollection()
+        {
+            IEnumerable<object> emptyCollection = Enumerable.Empty<object>();
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentEmpty(emptyCollection, nameof(emptyCollection)));
+        }
+
+        [Test]
+        public void ArgumentEmpty_NonEmptyCollection()
+        {
+            IEnumerable<object> nonEmptyCollection = new List<object>() { new object() };
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentEmpty(nonEmptyCollection, nameof(nonEmptyCollection)));
+
+            StringAssert.Contains(nameof(nonEmptyCollection), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonEmptyCollection)} must be empty", ex.Message);
+        }
+
+        [Test]
+        public void ArgumentNotEmpty_EmptyCollection()
         {
             IEnumerable<object> emptyCollection = Enumerable.Empty<object>();
 
@@ -26,12 +47,33 @@ namespace Arguard.Tests
         }
 
         [Test]
-        public void ArgumentNotEmptyCollection_ValidCollection()
+        public void ArgumentNotEmpty_NonEmptyCollection()
         {
-            IEnumerable<object> emptyCollection = new List<object>() { new object() };
+            IEnumerable<object> nonEmptyCollection = new List<object>() { new object() };
 
             Assert.DoesNotThrow(
-                () => Arguard.ArgumentNotEmpty(emptyCollection, nameof(emptyCollection)));
+                () => Arguard.ArgumentNotEmpty(nonEmptyCollection, nameof(nonEmptyCollection)));
+        }
+
+        [Test]
+        public void ArgumentNoNulls_CollectionWithNoNulls()
+        {
+            IEnumerable<object> collectionWithNoNulls = new List<object>() { new object(), new object(), new object() };
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNoNulls(collectionWithNoNulls, nameof(collectionWithNoNulls)));
+        }
+
+        [Test]
+        public void ArgumentNoNulls_CollectionWithNulls()
+        {
+            IEnumerable<object> collectionWithNulls = new List<object>() { new object(), null, new object() };
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNoNulls(collectionWithNulls, nameof(collectionWithNulls)));
+
+            StringAssert.Contains(nameof(collectionWithNulls), ex.ParamName);
+            StringAssert.Contains($"{nameof(collectionWithNulls)} cannot contain nulls", ex.Message);
         }
     }
 }
