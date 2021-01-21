@@ -67,10 +67,10 @@ namespace Arguard.Tests
         [TestCase(-10.1)]
         [TestCase(-100.1)]
         [TestCase(double.MinValue)]
-        public void ArgumentNegative_NegativeDouble(double positiveDouble)
+        public void ArgumentNegative_NegativeDouble(double negativeDouble)
         {
             Assert.DoesNotThrow(
-                () => Arguard.ArgumentNegative(positiveDouble, nameof(positiveDouble)));
+                () => Arguard.ArgumentNegative(negativeDouble, nameof(negativeDouble)));
         }
 
         [TestCase(0)]
@@ -78,13 +78,13 @@ namespace Arguard.Tests
         [TestCase(10.1)]
         [TestCase(100.1)]
         [TestCase(double.MaxValue)]
-        public void ArgumentNegative_NonNegativeDouble(double negativeDouble)
+        public void ArgumentNegative_NonNegativeDouble(double nonNegativeDouble)
         {
             var ex = Assert.Throws<ArgumentException>(
-                () => Arguard.ArgumentNegative(negativeDouble, nameof(negativeDouble)));
+                () => Arguard.ArgumentNegative(nonNegativeDouble, nameof(nonNegativeDouble)));
 
-            StringAssert.Contains(nameof(negativeDouble), ex.ParamName);
-            StringAssert.Contains($"{nameof(negativeDouble)} must be negative", ex.Message);
+            StringAssert.Contains(nameof(nonNegativeDouble), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonNegativeDouble)} must be negative", ex.Message);
         }
 
         [Test]

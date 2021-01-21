@@ -30,13 +30,61 @@ namespace Arguard.Tests
         [TestCase(10)]
         [TestCase(100)]
         [TestCase(long.MaxValue)]
-        public void ArgumentZero_NonZeroDouble(double nonZeroLong)
+        public void ArgumentZero_NonZeroDouble(long nonZeroLong)
         {
             var ex = Assert.Throws<ArgumentException>(
                 () => Arguard.ArgumentZero(nonZeroLong, nameof(nonZeroLong)));
 
             StringAssert.Contains(nameof(nonZeroLong), ex.ParamName);
             StringAssert.Contains($"{nameof(nonZeroLong)} must be zero", ex.Message);
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentPositive_PositiveLong(long positiveLong)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentPositive(positiveLong, nameof(positiveLong)));
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentPositive_NonPositiveDouble(long nonPositiveLong)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentPositive(nonPositiveLong, nameof(nonPositiveLong)));
+
+            StringAssert.Contains(nameof(nonPositiveLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonPositiveLong)} must be positive", ex.Message);
+        }
+
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentNegative_NegativeDouble(long negativeLong)
+        {
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNegative(negativeLong, nameof(negativeLong)));
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentNegative_NonNegativeDouble(double nonNegativeLong)
+        {
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNegative(nonNegativeLong, nameof(nonNegativeLong)));
+
+            StringAssert.Contains(nameof(nonNegativeLong), ex.ParamName);
+            StringAssert.Contains($"{nameof(nonNegativeLong)} must be negative", ex.Message);
         }
 
         [Test]
