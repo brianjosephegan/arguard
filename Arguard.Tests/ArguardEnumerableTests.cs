@@ -56,6 +56,30 @@ namespace Arguard.Tests
         }
 
         [Test]
+        public void ArgumentCount_CountMatches()
+        {
+            IEnumerable<object> collection = new List<object>() { new object(), new object(), new object() };
+            var expectedNumberOfElements = collection.Count();
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentCount(collection, nameof(collection), expectedNumberOfElements));
+        }
+
+        [Test]
+        public void ArgumentCount_CountDoesNotMatch()
+        {
+            IEnumerable<object> collection = new List<object>() { new object(), new object(), new object() };
+            var expectedNumberOfElements = collection.Count() + 1;
+
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentCount(collection, nameof(collection), expectedNumberOfElements));
+
+            StringAssert.Contains(nameof(collection), ex.ParamName);
+            StringAssert.Contains($"{nameof(collection)} must contain {expectedNumberOfElements} elements", ex.Message);
+        }
+
+        [Test]
         public void ArgumentNoNulls_CollectionWithNoNulls()
         {
             IEnumerable<object> collectionWithNoNulls = new List<object>() { new object(), new object(), new object() };

@@ -32,6 +32,14 @@ namespace Arguard
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
+        public static void ArgumentCount<T>(IEnumerable<T> argumentValue, string argumentName, int expectedCount)
+            => ThrowArgumentExceptionIf(() => argumentValue.Count() != expectedCount, argumentName, $"{argumentName} must contain {expectedCount} elements");
+
+        /// <summary>
+        /// Checks an enumerable argument to ensure it does not contain any nulls.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNoNulls<T>(IEnumerable<T> argumentValue, string argumentName)
             => ThrowArgumentExceptionIf(() => argumentValue.Any(v => v == null), argumentName, $"{argumentName} cannot contain nulls");
     }
