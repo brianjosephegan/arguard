@@ -32,6 +32,7 @@ namespace Arguard
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="expectedCount">Number of required arguments in the IEnumerable.</param>
         public static void ArgumentCount<T>(IEnumerable<T> argumentValue, string argumentName, int expectedCount)
             => ThrowArgumentExceptionIf(() => argumentValue.Count() != expectedCount, argumentName, $"{argumentName} must contain {expectedCount} elements");
 

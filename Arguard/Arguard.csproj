@@ -51,6 +51,7 @@
     <Compile Include="ArguardLong.cs" />
     <Compile Include="ArguardNull.cs" />
     <Compile Include="ArguardString.cs" />
+    <Compile Include="ArguardType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

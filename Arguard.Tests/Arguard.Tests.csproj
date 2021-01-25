@@ -55,6 +55,7 @@
     <Compile Include="ArguardLongTests.cs" />
     <Compile Include="ArguardNullTests.cs" />
     <Compile Include="ArguardStringTests.cs" />
+    <Compile Include="ArgumentTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
