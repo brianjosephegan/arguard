@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguard.cs" />
+    <Compile Include="ArguardBoolean.cs" />
     <Compile Include="ArguardDouble.cs" />
     <Compile Include="ArguardEnumerable.cs" />
     <Compile Include="ArguardGuid.cs" />

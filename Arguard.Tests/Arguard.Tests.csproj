@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArguardBooleanTests.cs" />
     <Compile Include="ArguardDoubleTests.cs" />
     <Compile Include="ArguardEnumerableTests.cs" />
     <Compile Include="ArguardGuidTests.cs" />
