@@ -34,5 +34,13 @@ namespace Arguard
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentLength(string argumentValue, string argumentName, int expectedLength)
             => ThrowArgumentExceptionIf(() => argumentValue.Length != expectedLength, argumentName, $"{argumentName} must be of length {expectedLength}");
+
+        /// <summary>
+        /// Checks a string argument to ensure it is not of a specified length.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        public static void ArgumentNotLength(string argumentValue, string argumentName, int expectedLength)
+            => ThrowArgumentExceptionIf(() => argumentValue.Length == expectedLength, argumentName, $"{argumentName} cannot be of length {expectedLength}");
     }
 }

@@ -75,5 +75,26 @@ namespace Arguard.Tests
             StringAssert.Contains(nameof(hello), ex.ParamName);
             StringAssert.Contains($"{nameof(hello)} must be of length 2", ex.Message);
         }
+
+        [Test]
+        public void ArgumentNotLength_ExpectedLengthMatched()
+        {
+            string hello = "hello";
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentNotLength(hello, nameof(hello), 5));
+
+            StringAssert.Contains(nameof(hello), ex.ParamName);
+            StringAssert.Contains($"{nameof(hello)} cannot be of length 5", ex.Message);
+        }
+
+        [Test]
+        public void ArgumentNotLength_ExpectedLengthNotMatched()
+        {
+            string hello = "hello";
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentNotLength(hello, nameof(hello), 2));
+        }
     }
 }
