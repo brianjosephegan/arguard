@@ -26,5 +26,13 @@ namespace Arguard
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotEmpty(string argumentValue, string argumentName)
             => ThrowArgumentExceptionIf(() => string.IsNullOrEmpty(argumentValue), argumentName, $"{argumentName} cannot be empty");
+
+        /// <summary>
+        /// Checks a string argument to ensure it is of a specified length.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        public static void ArgumentLength(string argumentValue, string argumentName, int expectedLength)
+            => ThrowArgumentExceptionIf(() => argumentValue.Length != expectedLength, argumentName, $"{argumentName} must be of length {expectedLength}");
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Arguard
 {
     /// <summary>
-    /// Class to provide a range of argument validation methods for IEnumerable scenarios.
+    /// Class to provide a range of argument validation methods for Double scenarios.
     /// </summary>
     public static partial class Arguard
     {

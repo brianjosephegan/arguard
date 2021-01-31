@@ -54,5 +54,26 @@ namespace Arguard.Tests
             Assert.DoesNotThrow(
                 () => Arguard.ArgumentNotEmpty(nonEmptyString, nameof(nonEmptyString)));
         }
+
+        [Test]
+        public void ArgumentLength_ExpectedLengthMatched()
+        {
+            string hello = "hello";
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentLength(hello, nameof(hello), 5));
+        }
+
+        [Test]
+        public void ArgumentLength_ExpectedLengthNotMatched()
+        {
+            string hello = "hello";
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentLength(hello, nameof(hello), 2));
+
+            StringAssert.Contains(nameof(hello), ex.ParamName);
+            StringAssert.Contains($"{nameof(hello)} must be of length 2", ex.Message);
+        }
     }
 }
