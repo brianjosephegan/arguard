@@ -160,5 +160,62 @@ namespace Arguard.Tests
             StringAssert.Contains(nameof(positiveLong), ex.ParamName);
             StringAssert.Contains($"{nameof(positiveLong)} cannot be positive", ex.Message);
         }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentGreaterThan_ValueGreaterThanThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentGreaterThan(value, nameof(value), thresholdValue));
+        }
+
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentGreaterThan_ValueLessThanOrEqualThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentGreaterThan(value, nameof(value), thresholdValue));
+
+            StringAssert.Contains(nameof(value), ex.ParamName);
+            StringAssert.Contains($"{nameof(value)} must be greater than {thresholdValue}", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentLessThan_ValueLessThanThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentLessThan(value, nameof(value), thresholdValue));
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentLessThan_ValueGreaterThanThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentLessThan(value, nameof(value), thresholdValue));
+
+            StringAssert.Contains(nameof(value), ex.ParamName);
+            StringAssert.Contains($"{nameof(value)} must be less than {thresholdValue}", ex.Message);
+        }
     }
 }
