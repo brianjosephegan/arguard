@@ -58,5 +58,23 @@ namespace Arguard
         /// <param name="argumentName">Specifies the name of the argument.</param>
         public static void ArgumentNotPositive(double argumentValue, string argumentName)
             => ThrowArgumentExceptionIf(() => argumentValue > 0, argumentName, $"{argumentName} cannot be positive");
+
+        /// <summary>
+        /// Checks a double argument to ensure is greater than the specified value.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="argumentThreshold">Value that argument must exceed.</param>
+        public static void ArgumentGreaterThan(double argumentValue, string argumentName, double argumentThreshold)
+            => ThrowArgumentExceptionIf(() => argumentValue <= argumentThreshold, argumentName, $"{argumentName} must be greater than {argumentThreshold}");
+
+        /// <summary>
+        /// Checks a double argument to ensure is less than the specified value.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="argumentThreshold">Value that argument must not exceed.</param>
+        public static void ArgumentLessThan(double argumentValue, string argumentName, double argumentThreshold)
+            => ThrowArgumentExceptionIf(() => argumentValue >= argumentThreshold, argumentName, $"{argumentName} must be less than {argumentThreshold}");
     }
 }

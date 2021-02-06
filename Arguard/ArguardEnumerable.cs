@@ -28,7 +28,7 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => !argumentValue.Any(), argumentName, $"{argumentName} cannot be empty");
 
         /// <summary>
-        /// Checks an enumerable argument to ensure it does not contain any nulls.
+        /// Checks an enumerable argument to ensure has the specified number of elements.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
