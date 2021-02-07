@@ -60,7 +60,7 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => argumentValue > 0, argumentName, $"{argumentName} cannot be positive");
 
         /// <summary>
-        /// Checks a double argument to ensure is greater than the specified value.
+        /// Checks a long argument to ensure is greater than the specified value.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
@@ -69,12 +69,30 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => argumentValue <= argumentThreshold, argumentName, $"{argumentName} must be greater than {argumentThreshold}");
 
         /// <summary>
-        /// Checks a double argument to ensure is less than the specified value.
+        /// Checks a long argument to ensure is greater than or equal to the specified value.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="argumentThreshold">Value that argument must exceed.</param>
+        public static void ArgumentGreaterThanOrEqualTo(long argumentValue, string argumentName, long argumentThreshold)
+            => ThrowArgumentExceptionIf(() => argumentValue < argumentThreshold, argumentName, $"{argumentName} must be greater than or equal to {argumentThreshold}");
+
+        /// <summary>
+        /// Checks a long argument to ensure is less than the specified value.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
         /// <param name="argumentName">Specifies the name of the argument.</param>
         /// <param name="argumentThreshold">Value that argument must not exceed.</param>
         public static void ArgumentLessThan(long argumentValue, string argumentName, long argumentThreshold)
             => ThrowArgumentExceptionIf(() => argumentValue >= argumentThreshold, argumentName, $"{argumentName} must be less than {argumentThreshold}");
+
+        /// <summary>
+        /// Checks a long argument to ensure is less than or equal to the specified value.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="argumentThreshold">Value that argument must exceed.</param>
+        public static void ArgumentLessThanOrEqualTo(long argumentValue, string argumentName, long argumentThreshold)
+            => ThrowArgumentExceptionIf(() => argumentValue < argumentThreshold, argumentName, $"{argumentName} must be less than or equal to {argumentThreshold}");
     }
 }

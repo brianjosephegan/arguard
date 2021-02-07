@@ -189,6 +189,34 @@ namespace Arguard.Tests
             StringAssert.Contains($"{nameof(value)} must be greater than {thresholdValue}", ex.Message);
         }
 
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentGreaterThanOrEqual_ValueGreaterThanOrEqualToThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentGreaterThanOrEqualTo(value, nameof(value), thresholdValue));
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentGreaterThanOrEqual_ValueLessThanThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentGreaterThanOrEqualTo(value, nameof(value), thresholdValue));
+
+            StringAssert.Contains(nameof(value), ex.ParamName);
+            StringAssert.Contains($"{nameof(value)} must be greater than or equal to {thresholdValue}", ex.Message);
+        }
+
         [TestCase(0)]
         [TestCase(-1)]
         [TestCase(-10)]
@@ -215,6 +243,35 @@ namespace Arguard.Tests
 
             StringAssert.Contains(nameof(value), ex.ParamName);
             StringAssert.Contains($"{nameof(value)} must be less than {thresholdValue}", ex.Message);
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-100)]
+        [TestCase(long.MinValue)]
+        public void ArgumentLessThanOrEqualTo_ValueLessThanOrEqualToThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            Assert.DoesNotThrow(
+                () => Arguard.ArgumentLessThanOrEqualTo(value, nameof(value), thresholdValue));
+        }
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(long.MaxValue)]
+        public void ArgumentLessThanOrEqualTo_ValueGreaterThanThreshold(long value)
+        {
+            var thresholdValue = 1;
+
+            var ex = Assert.Throws<ArgumentException>(
+                () => Arguard.ArgumentLessThanOrEqualTo(value, nameof(value), thresholdValue));
+
+            StringAssert.Contains(nameof(value), ex.ParamName);
+            StringAssert.Contains($"{nameof(value)} must be less than or equal to {thresholdValue}", ex.Message);
         }
     }
 }
