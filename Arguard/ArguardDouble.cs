@@ -69,6 +69,15 @@ namespace Arguard
             => ThrowArgumentExceptionIf(() => argumentValue <= argumentThreshold, argumentName, $"{argumentName} must be greater than {argumentThreshold}");
 
         /// <summary>
+        /// Checks a double argument to ensure is greater than or equal to the specified value.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="argumentThreshold">Value that argument must exceed.</param>
+        public static void ArgumentGreaterThanOrEqualTo(double argumentValue, string argumentName, double argumentThreshold)
+            => ThrowArgumentExceptionIf(() => argumentValue < argumentThreshold, argumentName, $"{argumentName} must be greater than or equal to {argumentThreshold}");
+
+        /// <summary>
         /// Checks a double argument to ensure is less than the specified value.
         /// </summary>
         /// <param name="argumentValue">Specifies the argument value to check.</param>
@@ -76,5 +85,14 @@ namespace Arguard
         /// <param name="argumentThreshold">Value that argument must not exceed.</param>
         public static void ArgumentLessThan(double argumentValue, string argumentName, double argumentThreshold)
             => ThrowArgumentExceptionIf(() => argumentValue >= argumentThreshold, argumentName, $"{argumentName} must be less than {argumentThreshold}");
+
+        /// <summary>
+        /// Checks a double argument to ensure is less than or equal to the specified value.
+        /// </summary>
+        /// <param name="argumentValue">Specifies the argument value to check.</param>
+        /// <param name="argumentName">Specifies the name of the argument.</param>
+        /// <param name="argumentThreshold">Value that argument must exceed.</param>
+        public static void ArgumentLessThanOrEqualTo(double argumentValue, string argumentName, double argumentThreshold)
+            => ThrowArgumentExceptionIf(() => argumentValue > argumentThreshold, argumentName, $"{argumentName} must be less than or equal to {argumentThreshold}");
     }
 }

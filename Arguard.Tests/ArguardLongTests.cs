@@ -161,7 +161,6 @@ namespace Arguard.Tests
             StringAssert.Contains($"{nameof(positiveLong)} cannot be positive", ex.Message);
         }
 
-        [TestCase(1)]
         [TestCase(10)]
         [TestCase(100)]
         [TestCase(long.MaxValue)]
